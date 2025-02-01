@@ -43,5 +43,9 @@ Proyek chatbot AI sederhana yang dibangun dengan React, TypeScript, dan API AI k
     Build untuk Produksi
     bash
     Copy
-
+    
     npm run build
+
+**Preview**
+
+![Screenshot_155](https://github.com/user-attachments/assets/5b7a7cf9-7d78-4389-b7b4-2e13ce914e88)
