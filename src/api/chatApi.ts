@@ -13,7 +13,7 @@ export const sendMessage = async (message: string, onProgress: (chunk: string) =
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'deepseek-ai/DeepSeek-V3', // Sesuaikan dengan model yang digunakan
+        model: 'deepseek-ai/DeepSeek-V3', 
         messages: [
           {
             role: 'user',
@@ -23,7 +23,7 @@ export const sendMessage = async (message: string, onProgress: (chunk: string) =
         max_tokens: 512,
         temperature: 0.1,
         top_p: 0.9,
-        stream: true, // Aktifkan streaming
+        stream: true,
       }),
     });
 
@@ -39,19 +39,15 @@ export const sendMessage = async (message: string, onProgress: (chunk: string) =
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-
-        // Decode chunk
         const chunk = decoder.decode(value);
-
-        // Proses setiap baris dalam chunk
         chunk
-          .split('\n') // Pisahkan berdasarkan baris baru
-          .filter((line) => line.startsWith('data: ')) // Ambil hanya baris yang dimulai dengan "data: "
+          .split('\n') 
+          .filter((line) => line.startsWith('data: '))
           .forEach((line) => {
             try {
-              const json = JSON.parse(line.slice(6)); // Hapus "data: " dan parse JSON
+              const json = JSON.parse(line.slice(6));
               if (json.choices[0].delta.content) {
-                onProgress(json.choices[0].delta.content); // Kirim konten ke callback
+                onProgress(json.choices[0].delta.content);
               }
             } catch (error) {
               console.error('Error parsing chunk:', error);
@@ -61,6 +57,6 @@ export const sendMessage = async (message: string, onProgress: (chunk: string) =
     }
   } catch (error) {
     console.error('Error sending message:', error);
-    throw error; // Lempar error ke pemanggil fungsi
+    throw error;
   }
 };

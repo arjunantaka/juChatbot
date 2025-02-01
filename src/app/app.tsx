@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatBox from '../components/chatBox'; // Sesuaikan path-nya
+import ChatBox from '../components/chatBox'; 
 import '../styles/styles.css';
 
 const App: React.FC = () => {

@@ -1,31 +1,29 @@
-import React, { useState, useEffect } from 'react'; // Impor useEffect
+import React, { useState, useEffect } from 'react';
 import { sendMessage } from '../api/chatApi';
 
 const ChatBox: React.FC = () => {
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // State untuk loading
-  const [currentResponse, setCurrentResponse] = useState(''); // State untuk respons streaming
+  const [isLoading, setIsLoading] = useState(false); 
+  const [currentResponse, setCurrentResponse] = useState('');
 
-  // Gunakan useEffect untuk menyimpan respons setelah streaming selesai
+  
   useEffect(() => {
     if (!isLoading && currentResponse) {
       setMessages((prevMessages) => [...prevMessages, { role: 'assistant', content: currentResponse }]);
-      setCurrentResponse(''); // Reset respons streaming
+      setCurrentResponse(''); 
     }
   }, [isLoading, currentResponse]);
 
   const handleSend = async () => {
     if (input.trim()) {
-      // Tambahkan pesan pengguna ke daftar pesan
       setMessages((prevMessages) => [...prevMessages, { role: 'user', content: input }]);
-      setIsLoading(true); // Set loading ke true
-      setCurrentResponse(''); // Reset respons streaming
+      setIsLoading(true); 
+      setCurrentResponse(''); 
 
       try {
-        // Kirim pesan ke API dan tangani respons streaming
         await sendMessage(input, (chunk) => {
-          setCurrentResponse((prev) => prev + chunk); // Tambahkan chunk ke respons saat ini
+          setCurrentResponse((prev) => prev + chunk); 
         });
       } catch (error) {
         console.error('Error:', error);
@@ -34,10 +32,10 @@ const ChatBox: React.FC = () => {
           { role: 'assistant', content: 'Maaf, terjadi kesalahan saat memproses pesan.' },
         ]);
       } finally {
-        setIsLoading(false); // Set loading ke false
+        setIsLoading(false); 
       }
 
-      // Kosongkan input
+      
       setInput('');
     }
   };
@@ -63,7 +61,7 @@ const ChatBox: React.FC = () => {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ketik pesan..."
           onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-          disabled={isLoading} // Nonaktifkan input saat loading
+          disabled={isLoading}
         />
         <button onClick={handleSend} disabled={isLoading}>
           Kirim
