@@ -1,0 +1,136 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Container Utama */
+.app-container {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Judul Aplikasi */
+.app-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+/* Kotak Chat */
+.chat-box {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Pesan Chat */
+.message {
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.user {
+  background-color: #007bff;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.message.assistant {
+  background-color: #e9ecef;
+  color: #333;
+  align-self: flex-start;
+}
+
+/* Input dan Tombol */
+.input-container {
+  display: flex;
+  gap: 10px;
+}
+
+.input-container input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.input-container input:focus {
+  border-color: #007bff;
+}
+
+.input-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsif */
+@media (max-width: 600px) {
+  .app-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .chat-box {
+    height: 300px;
+  }
+
+  .input-container input {
+    font-size: 14px;
+  }
+
+  .input-container button {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .message.assistant.loading {
+  color: #888;
+  font-style: italic;
+}
+
+/* Pesan Streaming */
+.message.assistant.streaming {
+  white-space: pre-wrap; /* Pertahankan format teks */
+}
+}
